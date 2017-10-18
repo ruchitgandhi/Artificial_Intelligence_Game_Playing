@@ -109,7 +109,6 @@ def calculateSuccessors(matrix):
     for i in range(n - 1, -1, -1):
         for j in range(n):
             if not visited[i][j] and not matrix[i][j] == -1:
-                # nextMatrix = copy.deepcopy(matrix)
                 nextMatrix = list(map(list, matrix))
                 regionLength, nextMatrix, emptyColumns = getMaxRegionLength(nextMatrix, i, j, visited)
                 successorObj = Successor(i, j, regionLength * regionLength, nextMatrix, emptyColumns)
@@ -170,12 +169,6 @@ def min_value(state, alpha, beta, depth):
             return v, totalDepth
         beta = min(beta, v)
     return v, totalDepth
-
-
-def readCalibrationFile():
-    with open('calibrate.txt') as file:
-        statesPerSecond = int(file.readline().rstrip('\n'))
-        return statesPerSecond
 
 
 def convertMinusOneToStar(matrix):
@@ -418,5 +411,5 @@ for i in range(len(matrixSize)):
     list_of_times.append(time_per_node * 1000)
     expandedStates = 0
 
-writeOutputToFile('calibrate.txt', list_of_times)
+writeOutputToFile('calibration.txt', list_of_times)
 print(time.time() - start_time)
